@@ -67,7 +67,7 @@ export default function StoryBook() {
 
             viewport={{once:true}}
 
-            className="w-[90%] max-w-6xl bg-white rounded-[40px] shadow-2xl p-12 flex gap-12"
+            className="w-[90%] max-w-6xl bg-white rounded-[40px] shadow-2xl p-8 md:p-12 flex flex-col md:flex-row gap-10 items-center"
 
           >
 
@@ -80,7 +80,7 @@ export default function StoryBook() {
 
               src={page.image}
 
-              className="w-[420px] rounded-3xl object-cover shadow-xl"
+              className="w-full md:w-[420px] rounded-3xl object-cover shadow-xl"
 
             />
 

@@ -17,14 +17,14 @@ export default function PasswordScreen({ next }) {
       if (newPin === PASSWORD) {
         setTimeout(() => {
           next();
-        }, 1200);
+        }, 1000);
       } else {
         setWrong(true);
 
         setTimeout(() => {
           setPin("");
           setWrong(false);
-        }, 1200);
+        }, 1000);
       }
     }
   };
@@ -34,67 +34,68 @@ export default function PasswordScreen({ next }) {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-pink-100 via-rose-50 to-pink-200 overflow-hidden relative">
+    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-rose-50 to-pink-200 flex items-center justify-center overflow-hidden relative p-4">
 
       {/* Floating Hearts */}
       {[...Array(20)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute text-pink-300 text-xl"
+          className="absolute text-pink-300 text-xl pointer-events-none"
           initial={{
             opacity: 0,
-            y: 700,
+            y: window.innerHeight + 100,
             x: Math.random() * window.innerWidth,
           }}
           animate={{
             opacity: [0, 0.8, 0],
-            y: -400,
+            y: -200,
           }}
           transition={{
             repeat: Infinity,
-            duration: 8 + Math.random() * 5,
-            delay: Math.random() * 3,
+            duration: 8 + Math.random() * 4,
+            delay: Math.random() * 4,
           }}
         >
           ❤️
         </motion.div>
       ))}
 
+      {/* Card */}
       <motion.div
-        animate={wrong ? { x: [-10, 10, -10, 10, 0] } : {}}
+        animate={wrong ? { x: [-8, 8, -8, 8, 0] } : {}}
         transition={{ duration: 0.4 }}
-        className="w-[380px] rounded-[35px] bg-white/70 backdrop-blur-xl shadow-2xl p-8 text-center"
+        className="relative w-full max-w-sm bg-white/70 backdrop-blur-xl rounded-3xl shadow-2xl p-6"
       >
 
-        {/* Snoopy */}
+        {/* Image */}
         <motion.img
-          src="/photos/snoopy.png"
-          alt="Snoopy"
-          className="w-40 mx-auto mb-4"
-          animate={{ y: [0, -8, 0] }}
+          src="/photos/favourite.jpg"
+          alt="Cheenuuuu"
+          className="w-28 h-28 rounded-2xl object-cover mx-auto shadow-lg"
+          animate={{ y: [0, -6, 0] }}
           transition={{
             repeat: Infinity,
             duration: 2,
           }}
         />
 
-        <h2 className="text-3xl font-bold text-pink-600">
+        <h1 className="text-center text-4xl font-bold text-pink-600 mt-5">
           Hey Cheenuuuu 💖
-        </h2>
+        </h1>
 
-        <p className="text-gray-600 mt-2">
+        <p className="text-center text-gray-600 mt-2">
           Enter your birthday password
         </p>
 
-        {/* PIN Dots */}
-        <div className="flex justify-center gap-3 mt-8">
+        {/* PIN */}
+        <div className="flex justify-center gap-2 mt-6">
           {[...Array(8)].map((_, i) => (
             <motion.div
               key={i}
               animate={{
-                scale: pin.length > i ? 1.2 : 1,
+                scale: pin.length > i ? 1.15 : 1,
               }}
-              className={`w-5 h-5 rounded-full ${
+              className={`w-4 h-4 rounded-full ${
                 pin.length > i
                   ? "bg-pink-500"
                   : "bg-pink-200"
@@ -107,45 +108,42 @@ export default function PasswordScreen({ next }) {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-red-500 mt-4 font-semibold"
+            className="text-center text-red-500 mt-4 font-semibold"
           >
-            Oopsie... Wrong Password 😝💕
+            Wrong Password 💔
           </motion.p>
         )}
 
         {/* Keypad */}
-        <div className="grid grid-cols-3 gap-4 mt-10">
+        <div className="grid grid-cols-3 gap-3 mt-8">
 
-          {[1,2,3,4,5,6,7,8,9].map((n)=>(
+          {[1,2,3,4,5,6,7,8,9].map((num)=>(
             <button
-              key={n}
-              onClick={()=>press(String(n))}
-              className="h-16 rounded-full bg-pink-400 text-white text-2xl shadow-lg hover:scale-105 active:scale-95 transition"
+              key={num}
+              onClick={()=>press(String(num))}
+              className="h-14 rounded-2xl bg-pink-500 text-white text-2xl font-semibold shadow-lg hover:bg-pink-600 active:scale-95 transition"
             >
-              {n}
+              {num}
             </button>
           ))}
 
           <button
             onClick={remove}
-            className="h-16 rounded-full bg-white text-pink-500 shadow-lg text-xl"
+            className="h-14 rounded-2xl bg-gray-100 text-2xl shadow hover:bg-gray-200"
           >
             ⌫
           </button>
 
           <button
             onClick={()=>press("0")}
-            className="h-16 rounded-full bg-pink-400 text-white text-2xl shadow-lg hover:scale-105 active:scale-95 transition"
+            className="h-14 rounded-2xl bg-pink-500 text-white text-2xl font-semibold shadow-lg hover:bg-pink-600 active:scale-95 transition"
           >
             0
           </button>
 
           <button
-            onClick={()=>{
-              setPin("");
-
-            }}
-            className="h-16 rounded-full bg-white text-pink-500 shadow-lg text-xl"
+            onClick={() => setPin("")}
+            className="h-14 rounded-2xl bg-gray-100 text-2xl shadow hover:bg-gray-200"
           >
             ✖
           </button>
@@ -153,14 +151,14 @@ export default function PasswordScreen({ next }) {
         </div>
 
         <motion.p
-          className="mt-8 text-pink-500"
           animate={{
-            opacity:[0.5,1,0.5]
+            opacity: [0.5, 1, 0.5],
           }}
           transition={{
-            repeat:Infinity,
-            duration:2
+            repeat: Infinity,
+            duration: 2,
           }}
+          className="text-center mt-6 text-pink-500"
         >
           Hint: It's your birthday 🎂
         </motion.p>

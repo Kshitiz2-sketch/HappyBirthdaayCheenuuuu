@@ -2,13 +2,261 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
+/* Google Font */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+html{
+    scroll-behavior:smooth;
+}
+
+html,
+body,
+#root{
+    width:100%;
+    min-height:100%;
     margin:0;
-    overflow:hidden;
-    font-family:'Poppins',sans-serif;
+    padding:0;
+}
+
+body{
+    font-family:"Poppins",sans-serif;
     background:#fff5f8;
+    overflow-x:hidden;
+    overflow-y:auto;
+    color:#333;
+}
+
+/* Better scrolling */
+body::-webkit-scrollbar{
+    width:10px;
+}
+
+body::-webkit-scrollbar-track{
+    background:#ffe6ef;
+}
+
+body::-webkit-scrollbar-thumb{
+    background:#ff7eb3;
+    border-radius:20px;
+}
+
+body::-webkit-scrollbar-thumb:hover{
+    background:#ff4f96;
 }
 
 *{
     box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+img{
+    display:block;
+    max-width:100%;
+    user-select:none;
+    -webkit-user-drag:none;
+}
+
+button{
+    cursor:pointer;
+    font-family:inherit;
+    border:none;
+    outline:none;
+}
+
+input,
+textarea{
+    font-family:inherit;
+    outline:none;
+}
+
+section{
+    position:relative;
+    width:100%;
+}
+
+::selection{
+    background:#ff69b4;
+    color:white;
+}
+
+.clip-path-triangle{
+clip-path:polygon(0 0,100% 0,50% 100%);
+}
+
+.paper{
+background:
+linear-gradient(
+to bottom,
+#fffdf9,
+#fff7ef
+);
+
+box-shadow:
+0 40px 80px rgba(0,0,0,.15);
+
+position:relative;
+
+overflow:hidden;
+}
+
+.paper::before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background-image:
+repeating-linear-gradient(
+transparent,
+transparent 38px,
+rgba(255,182,193,.15) 39px
+);
+
+pointer-events:none;
+
+}
+
+.handwriting{
+
+font-family:"Great Vibes",cursive;
+
+}
+
+.glow{
+
+box-shadow:
+0 0 30px rgba(255,105,180,.3),
+0 0 60px rgba(255,182,193,.25);
+
+}
+
+.sparkle{
+
+position:absolute;
+
+width:8px;
+
+height:8px;
+
+border-radius:50%;
+
+background:white;
+
+animation:sparkle 2.5s infinite;
+
+}
+
+@keyframes sparkle{
+
+0%{
+opacity:0;
+transform:scale(0);
+}
+
+50%{
+opacity:1;
+transform:scale(1);
+}
+
+100%{
+opacity:0;
+transform:scale(0);
+}
+
+}
+/* Smooth Scrolling */
+
+html {
+  scroll-behavior: smooth;
+}
+/* Better Scroll */
+
+body {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+::selection{
+    background:#ec4899;
+    color:white;
+}
+.glass{
+    background:rgba(255,255,255,.18);
+    backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.25);
+}
+className="glass"
+.glow{
+    box-shadow:
+    0 0 30px rgba(255,105,180,.18),
+    0 0 80px rgba(255,182,193,.15);
+}
+className="glass glow"
+@keyframes floating{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-8px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
+.floating{
+animation:floating 4s ease-in-out infinite;
+}
+className="floating"
+
+/* ===== Cursor Glow ===== */
+
+body::before{
+    content:"";
+    position:fixed;
+    left:var(--x,50%);
+    top:var(--y,50%);
+    width:250px;
+    height:250px;
+    transform:translate(-50%,-50%);
+    background:radial-gradient(circle,
+        rgba(255,192,203,.18),
+        transparent 70%);
+    pointer-events:none;
+    z-index:9999;
+    transition:left .05s linear, top .05s linear;
+}
+/* Hide Scrollbar */
+
+::-webkit-scrollbar{
+    width:0;
+    background:transparent;
+}
+
+html{
+    scrollbar-width:none;
+}
+img{
+    transition:transform .4s ease;
+}
+button{
+    transition:.3s;
+}
+
+button:hover{
+    filter:brightness(1.05);
+}
+button:focus,
+input:focus{
+    outline:none;
 }

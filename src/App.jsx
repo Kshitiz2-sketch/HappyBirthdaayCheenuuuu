@@ -1,17 +1,28 @@
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+
 import LoadingScreen from "./components/LoadingScreen";
 import IncomingCall from "./components/IncomingCall";
 import PasswordScreen from "./components/PasswordScreen";
-import GiftOpening from "./components/GiftOpening";
+import GiftBox3D from "./components/GiftBox3D";
+
+import BackgroundEffects from "./components/BackgroundEffects";
+import ScrollProgress from "./components/ScrollProgress";
+import MusicPlayer from "./components/MusicPlayer";
+
 import HeroSection from "./components/HeroSection";
+import StoryBook from "./components/StoryBook";
+import Gallery from "./components/Gallery";
+import MemoryBook from "./components/MemoryBook";
+import BirthdayLetter from "./components/BirthdayLetter";
+import Cake from "./components/Cake";
+import Ending from "./components/Ending";
 
-function App() {
-
+export default function App() {
   const [screen, setScreen] = useState("loading");
 
   const nextScreen = () => {
     switch (screen) {
-
       case "loading":
         setScreen("call");
         break;
@@ -34,8 +45,13 @@ function App() {
   };
 
   return (
-
-    <div className="w-screen h-screen overflow-hidden bg-pink-50">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="min-h-screen bg-pink-50 overflow-x-hidden"
+    >
+      {/* First Screens */}
 
       {screen === "loading" && (
         <LoadingScreen next={nextScreen} />
@@ -50,16 +66,36 @@ function App() {
       )}
 
       {screen === "gift" && (
-        <GiftOpening next={nextScreen} />
+        <GiftBox3D next={nextScreen} />
       )}
 
-      {screen === "hero" && (
-        <HeroSection />
-      )}
+      {/* Main Birthday Website */}
 
-    </div>
+ {/* Main Birthday Website */}
 
+{screen === "hero" && (
+  <AnimatePresence mode="wait">
+    <motion.div
+      key="birthday"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1 }}
+    >
+      <BackgroundEffects />
+      <ScrollProgress />
+      <MusicPlayer />
+
+      <HeroSection />
+      <StoryBook />
+      <Gallery />
+      <MemoryBook />
+      <BirthdayLetter />
+      <Cake />
+      <Ending />
+    </motion.div>
+  </AnimatePresence>
+)}
+    </motion.div>
   );
 }
-
-export default App;
